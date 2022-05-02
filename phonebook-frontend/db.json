@@ -1,0 +1,64 @@
+{
+  "persons": [
+    {
+      "name": "Arto Hellas",
+      "number": "040-123456",
+      "id": 1
+    },
+    {
+      "name": "Ada Lovelace",
+      "number": "39-44-5323523",
+      "id": 2
+    },
+    {
+      "name": "Dan Abramov",
+      "number": "12-43-234345",
+      "id": 3
+    },
+    {
+      "name": "Mary Poppendieck",
+      "number": "39-23-6423122",
+      "id": 4
+    },
+    {
+      "name": "Edsger Dijkstra",
+      "number": "654-87-642311",
+      "id": 5
+    },
+    {
+      "name": "Brian Kernighan",
+      "number": "789-654789",
+      "id": 6
+    },
+    {
+      "name": "Oblo scvbiari",
+      "number": "789456.789456123",
+      "id": 7
+    },
+    {
+      "name": "Kocko Phonebook Delete",
+      "number": "999.888.777",
+      "id": 9
+    },
+    {
+      "name": "Duo Sova Lingo",
+      "number": "444.4444444",
+      "id": 10
+    },
+    {
+      "name": "Gospodin Skočko-Kvizovi",
+      "number": "000.987654321",
+      "id": 11
+    },
+    {
+      "name": "Das Globus von Lecker",
+      "number": "1717.171717",
+      "id": 12
+    },
+    {
+      "name": "Blobo stwegzi",
+      "number": "963.963963",
+      "id": 13
+    }
+  ]
+}
