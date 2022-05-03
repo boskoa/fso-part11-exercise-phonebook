@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = "api/persons"
+const baseUrl = 'api/persons'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
@@ -19,5 +19,4 @@ const updatePhonebook = (updatedEntry, id) => {
   return request.then(response => response.data)
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default { createEntry, getAll, removeEntry, updatePhonebook }

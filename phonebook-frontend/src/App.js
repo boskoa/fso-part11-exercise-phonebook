@@ -6,29 +6,29 @@ import phonebookServices from './services/phonebook'
 import Notification from './components/Notification'
 
 const App = () => {
-  const [persons, setPersons] = useState([]) 
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setNewFilter] = useState('')
-  const [message, setMessage] = useState({text: null, style: null})
+  const [message, setMessage] = useState({ text: null, style: null })
 
   const nStyle = {
-    color: "green",
-    border: "2px solid green",
-    borderRadius: "5px",
-    padding: "5px",
-    background: "lightgrey",
-    fontSize: "15px",
-    marginBottom: "10px"
+    color: 'green',
+    border: '2px solid green',
+    borderRadius: '5px',
+    padding: '5px',
+    background: 'lightgrey',
+    fontSize: '15px',
+    marginBottom: '10px'
   }
   const eStyle = {
-    color: "red",
-    border: "2px solid red",
-    borderRadius: "5px",
-    padding: "5px",
-    background: "lightgrey",
-    fontSize: "15px",
-    marginBottom: "10px"
+    color: 'red',
+    border: '2px solid red',
+    borderRadius: '5px',
+    padding: '5px',
+    background: 'lightgrey',
+    fontSize: '15px',
+    marginBottom: '10px'
   }
 
   useEffect(() => {
@@ -45,33 +45,33 @@ const App = () => {
       name: newName,
       number: newNumber
     }
-    
+
     for (let i of persons) {
       if (i.name === newName) {
         const change = window.confirm(`${newName} is already added to the phonebook. \
 Replace the old number with the new one?`)
         if (change) {
           phonebookServices
-          .updatePhonebook(personObject, i.id)
-          .then(response => setPersons(persons.map(p => {
-            return (
-              p.name === response.name ?
-              response :
-              p
-            )
-          })))
-          .catch(error => {
-            setMessage({
-              text: `Information for ${i.name} has already been removed from server.`,
-              style: eStyle
+            .updatePhonebook(personObject, i.id)
+            .then(response => setPersons(persons.map(p => {
+              return (
+                p.name === response.name ?
+                  response :
+                  p
+              )
+            })))
+            .catch(() => {
+              setMessage({
+                text: `Information for ${i.name} has already been removed from server.`,
+                style: eStyle
+              })
+              setTimeout(() => setMessage({ text: null, style: null }), 5000)
             })
-            setTimeout(() => setMessage({text: null, style: null}), 5000)
-          })
           setMessage({
             text: `Phone number was updated for ${i.name}`,
             style: nStyle
           })
-          setTimeout(() => setMessage({text: null, style: null}), 5000)
+          setTimeout(() => setMessage({ text: null, style: null }), 5000)
         }
 
         setNewName('')
@@ -89,10 +89,10 @@ Replace the old number with the new one?`)
       })
       .then(() => {
         setMessage({
-        text: `Added ${personObject.name}`,
-        style: nStyle
+          text: `Added ${personObject.name}`,
+          style: nStyle
         })
-        setTimeout(() => setMessage({text: null, style: null}), 5000)
+        setTimeout(() => setMessage({ text: null, style: null }), 5000)
       })
       .catch(error => {
         if (error.response.status === 400) {
@@ -100,7 +100,7 @@ Replace the old number with the new one?`)
             text: `${error.response.data.error}`,
             style: eStyle
           })
-          setTimeout(() => setMessage({text: null, style: null}), 5000)
+          setTimeout(() => setMessage({ text: null, style: null }), 5000)
         }
       })
   }
@@ -109,19 +109,19 @@ Replace the old number with the new one?`)
     const result = window.confirm(`Delete ${person.name}?`)
     if (result) {
       phonebookServices.removeEntry(person.id)
-      .catch(error => {
-        setMessage({
-          text: `Information for ${person.name} has already been removed from server.`,
-          style: eStyle
+        .catch(() => {
+          setMessage({
+            text: `Information for ${person.name} has already been removed from server.`,
+            style: eStyle
+          })
+          setTimeout(() => setMessage({ text: null, style: null }), 5000)
         })
-        setTimeout(() => setMessage({text: null, style: null}), 5000)
-      })
       setPersons(persons.filter(p => p.id !== person.id))
       setMessage({
         text: `Removed ${person.name}`,
         style: nStyle
       })
-      setTimeout(() => setMessage({text: null, style: null}), 5000)
+      setTimeout(() => setMessage({ text: null, style: null }), 5000)
     }
   }
 
@@ -139,11 +139,11 @@ Replace the old number with the new one?`)
         handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
       <h2>Numbers</h2>
       <div>
-        {filter ? 
+        {filter ?
           persons.filter(person =>
             person.name.toLowerCase()
-            .includes(filter.toLowerCase())).map((person) =>
-              <Contact key={person.id} person={person} action={() => removePerson(person)} />
+              .includes(filter.toLowerCase())).map((person) =>
+            <Contact key={person.id} person={person} action={() => removePerson(person)} />
           ) :
           persons.map((person) =>
             <Contact key={person.id} person={person} action={() => removePerson(person)} />
@@ -154,4 +154,4 @@ Replace the old number with the new one?`)
   )
 }
 
-export default App;
+export default App
