@@ -21,3 +21,9 @@ jobs:
         run: npm run lint
       - name: build
         run: npm run build:ui
+      - name: testing
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start
+          wait-on: http://localhost:3001
