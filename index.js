@@ -13,15 +13,14 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :f
 morgan.token('fso', (req) => {
   return JSON.stringify(req.body)
 })
-/*
-app.get('/api/health', (request, response) => {
+
+app.get('/health', (request, response) => {
   response.send('ok')
 })
 
-app.get('/api/version', (request, response) => {
+app.get('/version', (request, response) => {
   response.send('1')
 })
-*/
 
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(result => response.json(result))
