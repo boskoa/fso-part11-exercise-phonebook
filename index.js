@@ -65,7 +65,6 @@ app.post('/api/persons', (request, response, next) => {
     name: request.body.name,
     number: request.body.number,
   })
-  console.log(newPerson)
 
   if (!(newPerson.name && newPerson.number)) {
     return response.status(400).json({ error: 'content missing' })
