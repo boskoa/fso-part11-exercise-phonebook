@@ -41,6 +41,20 @@ jobs:
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true
+      - name: Successfull deployment
+        uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') && success() }}
+        with:
+            severity: info
+            details: A new version of Phonebook deployed.
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Build failed
+        uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') && failure() }}
+        with:
+            severity: error
+            details: New build failed.
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
