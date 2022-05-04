@@ -2,13 +2,20 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+const path = require('path')
 const Person = require('./models/person')
 
 const app = express()
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('phonebook-frontend/build'))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'phonebook-frontend', 'build', 'index.html'))
+  })
+}
+
 app.use(cors())
 app.use(express.json())
-app.use(express.static('phonebook-frontend/build'))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :fso'))
 morgan.token('fso', (req) => {
   return JSON.stringify(req.body)
