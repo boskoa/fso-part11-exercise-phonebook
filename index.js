@@ -14,11 +14,11 @@ morgan.token('fso', (req) => {
   return JSON.stringify(req.body)
 })
 
-app.get('/health', (request, response) => {
+app.get('/api/health', (request, response) => {
   response.send('ok')
 })
 
-app.get('/version', (request, response) => {
+app.get('/api/version', (request, response) => {
   response.send('1')
 })
 
